@@ -1,36 +1,35 @@
 # Cube.dev APM Test
 
-Goals:
+## Intro
 
+This is my submission for the [APM test project][apm]. The goals were:
+
+- get a cube.dev cluster running
+- write a metrics collector to record events from the API agent.
+- a dashboard for queries/minute and requests/minute.
 - production ready and horizontally scalable as much as possible.
 - 100 queries per second
 
-Questions:
-- what counts as a request? Here I am counting only "REST API Request".
+My implementation:
+- I wrote a simple collector in Javascript using the Websocket API I found in the cubejs source.
+- The "REST API Request" events are written to the `request` table in pgSQL
+- The "query completed" events are written to the `queries` table in pgSQL
+- The dashboard is based off the D3 example, simplified a bit and with a built-in load generator.
+
+For scalability:
+- It's possible to add more collectors, API servers, store workers, refresh workers and dashboard instances.
+- By default there are 4 API servers, since they seemed to be the bottleneck.
+
+[apm]: https://descriptive-reply-0b7.notion.site/APM-Test-Project-3955dc71b5564923b2dc380c75b49b0b
 
 ## Usage 
 
-    docker compose up -d
-    
-    # open Dashboard
-    open http://localhost:3000 
+1. `docker compose up -d`
+2. Open dashboard at http://localhost:3000
+3. For load testing, you can set the `Load` parameter on the dashboard.
+4. The collector is running at `ws://localhost:5000` if you want to point more sources at it.
 
-## TODO
-
-Done:
-
-- [x] Create repo
-- [x] Write docker-compose
-- [x] Write Schema
-- [x] Run basic cube cluster
-- [x] Write collector
-- [ ] Write dashboard
-    - queries/sec
-    - requests/sec
-    - top-10 queries by duration 
-- [x] [Pre Aggregations](https://cube.dev/docs/schema/reference/pre-aggregations)
-    - [x] Add partitions
-- [x] Disable devmode.
+## Possible Future Improvements
 
 To really make it production ready:
 
@@ -47,27 +46,25 @@ To scale even more:
 - [ ] Scale redis service.
 - [ ] Scale S3 service or use real S3.
 
+## TODO: Done
+
+- [x] Create repo
+- [x] Write docker-compose
+- [x] Write Schema
+- [x] Run basic cube cluster
+- [x] Write collector
+- [x] Write dashboard
+    - queries/sec
+    - requests/sec
+    - top-10 queries by duration 
+- [x] [Pre Aggregations](https://cube.dev/docs/schema/reference/pre-aggregations)
+    - [x] Add partitions
+- [x] Disable devmode.
+
 ## Feedback
 
-Broken link
+There is a broken link here:
+
 - https://statsbot.co/blog/node-express-analytics-dashboard-with-cubejs/
 - from https://cube.dev/blog/cubejs-open-source-dashboard-framework-ultimate-guide
-
-## Dev Docs
-
-- https://descriptive-reply-0b7.notion.site/APM-Test-Project-3955dc71b5564923b2dc380c75b49b0b
-- https://cube.dev/docs/examples
-- https://cube.dev/blog/cubejs-open-source-dashboard-framework-ultimate-guide
-
-Queries:
-
-    {
-        measures: ['Users.count'],
-        dimensions: ['Users.city'],
-        timeDimensions: [{
-            dimension: 'Users.signedUp',
-           granularity: 'month',
-           dateRange: ['2020-01-31', '2020-12-31']
-        }
-    }
 

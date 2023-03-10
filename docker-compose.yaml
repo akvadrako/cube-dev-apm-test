@@ -35,6 +35,7 @@ services:
   collector_1:
     build: ./collector
     env_file: shared.env
+    ports: ['5000:5000']
     volumes:
       - ./collector/main.js:/home/main.js
     depends_on:

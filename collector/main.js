@@ -43,9 +43,6 @@ async function main() {
         await db.query(stmt)
     }
 
-    //const res = await db.query('SELECT $1::text as message', ['Hello world!'])
-    //console.log(res.rows[0].message) // Hello world!
-
     console.info('WebSocket Setup')
     const wss = new WebSocketServer({ port: PORT });
     wss.on('connection', onConnect)
