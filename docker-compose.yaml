@@ -1,0 +1,60 @@
+environment:
+      - CUBESTORE_S3_BUCKET=<BUCKET_NAME_IN_S3>
+      - CUBESTORE_S3_REGION=<BUCKET_REGION_IN_S3>
+      - CUBESTORE_AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+      - CUBESTORE_AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+services:
+  db:
+    # postgres
+  s3server:
+    # s3
+  agent_1:
+    # ...
+  agent_2:
+    # ...
+  cube:
+    restart: always
+    image: cubejs/cube:latest
+    ports:
+      - 4000:4000
+    environment:
+      - CUBEJS_CUBESTORE_HOST=router
+      - CUBEJS_DEV_MODE=true
+      - CUBEJS_AGENT_ENDPOINT_URL=agent_1
+    depends_on:
+      - router
+    volumes:
+      - ./conf:/cube/conf
+  router:
+    restart: always
+    image: cubejs/cubestore:latest
+    environment:
+      - CUBESTORE_SERVER_NAME=router:9999
+      - CUBESTORE_META_PORT=9999
+      - CUBESTORE_WORKERS=worker_1:9001,worker_2:9001
+    volumes:
+      - ./data:/cube/data
+  worker_1:
+    restart: always
+    image: cubejs/cubestore:latest
+    environment:
+      - CUBESTORE_SERVER_NAME=worker_1:9001
+      - CUBESTORE_WORKER_PORT=9001
+      - CUBESTORE_META_ADDR=router:9999
+      - CUBESTORE_WORKERS=worker_1:9001,worker_2:9001
+    depends_on:
+      - router
+    volumes:
+      - ./data:/cube/data
+  worker_2:
+    restart: always
+    image: cubejs/cubestore:latest
+    environment:
+      - CUBESTORE_SERVER_NAME=worker_2:9001
+      - CUBESTORE_WORKER_PORT=9001
+      - CUBESTORE_META_ADDR=router:9999
+      - CUBESTORE_WORKERS=worker_1:9001,worker_2:9001
+    depends_on:
+      - router
+    volumes:
+      - ./data:/cube/data
