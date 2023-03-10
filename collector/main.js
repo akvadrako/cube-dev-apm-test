@@ -6,6 +6,7 @@ import { WebSocketServer } from 'ws'
 import pg from 'pg'
 import {inflate} from 'pako'
 import process from 'process'
+import jwt from 'jsonwebtoken'
 
 const DB_URL = 'postgres://user:pass@db/metrics'
 const PORT = 5000
@@ -31,6 +32,9 @@ const db = new pg.Client({ connectionString: DB_URL })
 
 async function main() {
     console.info('Starting collector')
+
+    const token = jwt.sign({}, process.env.CUBEJS_API_SECRET, { expiresIn: '30d' })
+    console.log('JWT TOKEN', token)
 
     await db.connect()
 
@@ -81,6 +85,8 @@ const IGNORED = [
     'Renewing existing key',
     'Executing Load Pre Aggregation SQL',
     'Refresh Scheduler Run',
+    'Load PreAggregations Tables',
+    'Refreshing pre-aggregation content',
 ]
 
 // TODO: add authentication
@@ -113,7 +119,7 @@ async function onMessage(raw, ws) {
                 ON CONFLICT (id) DO NOTHING
             `, [id, timestamp])
         } else {
-            console.log('unknown event', event)
+            console.log('unknown event', event.msg)
         }
     }
 

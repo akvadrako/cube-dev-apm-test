@@ -6,7 +6,7 @@ RUN corepack enable \
 
 WORKDIR /home
 
-ADD package.json .
+ADD package.json yarn.lock ./
 
 RUN yarn install
 

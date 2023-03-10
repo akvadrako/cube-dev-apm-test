@@ -5759,6 +5759,7 @@ __metadata:
     antd: ^3.26.2
     cross-env: ^7.0.2
     d3: ^5.14.2
+    eslint-config-react: ^1.1.7
     prop-types: ^15.7.2
     react: ^16.12.0
     react-dom: ^16.12.0
@@ -6572,6 +6573,13 @@ __metadata:
   peerDependencies:
     eslint: ^8.0.0
   checksum: a67e0821809e62308d6e419753fa2acfc7cd353659fab08cf34735f59c6c66910c0b6fda0471c4ec0d712ce762d65efc6431b39569f8d575e2d9bdfc384e0824
+  languageName: node
+  linkType: hard
+
+"eslint-config-react@npm:^1.1.7":
+  version: 1.1.7
+  resolution: "eslint-config-react@npm:1.1.7"
+  checksum: 15d3d7f78e720c225ac983fb6985825b561941f1c930116c96f8ab8600eb65db603f5ef200a10fabd51f8ef564c107e8eb0d3f69609bfdedfb50290227249a70
   languageName: node
   linkType: hard
 

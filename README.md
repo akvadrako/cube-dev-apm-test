@@ -17,6 +17,8 @@ Questions:
 
 ## TODO
 
+Done:
+
 - [x] Create repo
 - [x] Write docker-compose
 - [x] Write Schema
@@ -28,7 +30,7 @@ Questions:
     - top-10 queries by duration 
 - [x] [Pre Aggregations](https://cube.dev/docs/schema/reference/pre-aggregations)
     - [x] Add partitions
-- [ ] Disable devmode.
+- [x] Disable devmode.
 
 To really make it production ready:
 
@@ -37,7 +39,7 @@ To really make it production ready:
 - [ ] Use ingress / reverse-proxy
 - [ ] Use kustomize and terraform for setup.
 - [ ] Add health checks.
-- [ ] Add authentication (JWT), https://cube.dev/docs/security
+- [ ] Use a login and real secrets.
 
 To scale even more:
 

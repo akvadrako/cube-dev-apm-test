@@ -28,11 +28,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["jsonwebtoken", "npm:9.0.0"],\
+            ["pako", "npm:2.1.0"],\
             ["pg", "virtual:f5a1bb50a9190ecb743d0e417bb89e5adab06bfa05ca108cd854c4097f23e047fbc7c1c4cf1e94cf68b87b2b28601992fd6337746bbe80ba30d4d46213907f55#npm:8.10.0"],\
-            ["ws", "virtual:f5a1bb50a9190ecb743d0e417bb89e5adab06bfa05ca108cd854c4097f23e047fbc7c1c4cf1e94cf68b87b2b28601992fd6337746bbe80ba30d4d46213907f55#npm:8.12.1"],\
-            ["zlib", "npm:1.0.5"]\
+            ["ws", "virtual:f5a1bb50a9190ecb743d0e417bb89e5adab06bfa05ca108cd854c4097f23e047fbc7c1c4cf1e94cf68b87b2b28601992fd6337746bbe80ba30d4d46213907f55#npm:8.12.1"]\
           ],\
           "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["buffer-equal-constant-time", [\
+        ["npm:1.0.1", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/buffer-equal-constant-time-npm-1.0.1-41826f3419-8.zip/node_modules/buffer-equal-constant-time/",\
+          "packageDependencies": [\
+            ["buffer-equal-constant-time", "npm:1.0.1"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["buffer-writer", [\
@@ -49,11 +59,86 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["cube-collector", "workspace:."],\
+            ["jsonwebtoken", "npm:9.0.0"],\
+            ["pako", "npm:2.1.0"],\
             ["pg", "virtual:f5a1bb50a9190ecb743d0e417bb89e5adab06bfa05ca108cd854c4097f23e047fbc7c1c4cf1e94cf68b87b2b28601992fd6337746bbe80ba30d4d46213907f55#npm:8.10.0"],\
-            ["ws", "virtual:f5a1bb50a9190ecb743d0e417bb89e5adab06bfa05ca108cd854c4097f23e047fbc7c1c4cf1e94cf68b87b2b28601992fd6337746bbe80ba30d4d46213907f55#npm:8.12.1"],\
-            ["zlib", "npm:1.0.5"]\
+            ["ws", "virtual:f5a1bb50a9190ecb743d0e417bb89e5adab06bfa05ca108cd854c4097f23e047fbc7c1c4cf1e94cf68b87b2b28601992fd6337746bbe80ba30d4d46213907f55#npm:8.12.1"]\
           ],\
           "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["ecdsa-sig-formatter", [\
+        ["npm:1.0.11", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/ecdsa-sig-formatter-npm-1.0.11-b6784e7852-8.zip/node_modules/ecdsa-sig-formatter/",\
+          "packageDependencies": [\
+            ["ecdsa-sig-formatter", "npm:1.0.11"],\
+            ["safe-buffer", "npm:5.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["jsonwebtoken", [\
+        ["npm:9.0.0", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/jsonwebtoken-npm-9.0.0-36fd1594c0-8.zip/node_modules/jsonwebtoken/",\
+          "packageDependencies": [\
+            ["jsonwebtoken", "npm:9.0.0"],\
+            ["jws", "npm:3.2.2"],\
+            ["lodash", "npm:4.17.21"],\
+            ["ms", "npm:2.1.3"],\
+            ["semver", "npm:7.3.8"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["jwa", [\
+        ["npm:1.4.1", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/jwa-npm-1.4.1-4f19d6572c-8.zip/node_modules/jwa/",\
+          "packageDependencies": [\
+            ["jwa", "npm:1.4.1"],\
+            ["buffer-equal-constant-time", "npm:1.0.1"],\
+            ["ecdsa-sig-formatter", "npm:1.0.11"],\
+            ["safe-buffer", "npm:5.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["jws", [\
+        ["npm:3.2.2", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/jws-npm-3.2.2-c1ae59c7af-8.zip/node_modules/jws/",\
+          "packageDependencies": [\
+            ["jws", "npm:3.2.2"],\
+            ["jwa", "npm:1.4.1"],\
+            ["safe-buffer", "npm:5.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["lodash", [\
+        ["npm:4.17.21", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/lodash-npm-4.17.21-6382451519-8.zip/node_modules/lodash/",\
+          "packageDependencies": [\
+            ["lodash", "npm:4.17.21"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["lru-cache", [\
+        ["npm:6.0.0", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/lru-cache-npm-6.0.0-b4c8668fe1-8.zip/node_modules/lru-cache/",\
+          "packageDependencies": [\
+            ["lru-cache", "npm:6.0.0"],\
+            ["yallist", "npm:4.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["ms", [\
+        ["npm:2.1.3", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/ms-npm-2.1.3-81ff3cfac1-8.zip/node_modules/ms/",\
+          "packageDependencies": [\
+            ["ms", "npm:2.1.3"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["packet-reader", [\
@@ -61,6 +146,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "../../../../../.yarn/berry/cache/packet-reader-npm-1.0.0-e93c92246b-8.zip/node_modules/packet-reader/",\
           "packageDependencies": [\
             ["packet-reader", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["pako", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/pako-npm-2.1.0-78df11948c-8.zip/node_modules/pako/",\
+          "packageDependencies": [\
+            ["pako", "npm:2.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -204,6 +298,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["safe-buffer", [\
+        ["npm:5.2.1", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/safe-buffer-npm-5.2.1-3481c8aa9b-8.zip/node_modules/safe-buffer/",\
+          "packageDependencies": [\
+            ["safe-buffer", "npm:5.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["semver", [\
+        ["npm:7.3.8", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/semver-npm-7.3.8-25a996cb4f-8.zip/node_modules/semver/",\
+          "packageDependencies": [\
+            ["semver", "npm:7.3.8"],\
+            ["lru-cache", "npm:6.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["split2", [\
         ["npm:4.1.0", {\
           "packageLocation": "../../../../../.yarn/berry/cache/split2-npm-4.1.0-1c1a4bd984-8.zip/node_modules/split2/",\
@@ -248,11 +361,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["zlib", [\
-        ["npm:1.0.5", {\
-          "packageLocation": "./.yarn/unplugged/zlib-npm-1.0.5-9db0b95997/node_modules/zlib/",\
+      ["yallist", [\
+        ["npm:4.0.0", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/yallist-npm-4.0.0-b493d9e907-8.zip/node_modules/yallist/",\
           "packageDependencies": [\
-            ["zlib", "npm:1.0.5"]\
+            ["yallist", "npm:4.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\

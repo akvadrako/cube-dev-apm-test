@@ -53,7 +53,7 @@ services:
 
   # API instances
   api_1:
-    # restart: always
+    restart: never
     image: cubejs/cube:v0.32.3
     env_file: shared.env
     ports:
@@ -67,11 +67,59 @@ services:
       - collector_1
     volumes:
       - ./schema:/cube/conf/schema
-      - ./dashboard-app:/cube/conf/dashboard-app
+  
+  api_2:
+    restart: never
+    image: cubejs/cube:v0.32.3
+    env_file: shared.env
+    ports:
+      - 4001:4000
+    environment:
+      - CUBEJS_AGENT_ENDPOINT_URL=ws://collector_1:5000
+    depends_on:
+      - db
+      - router
+      - redis
+      - collector_1
+    volumes:
+      - ./schema:/cube/conf/schema
+  
+  api_3:
+    restart: never
+    image: cubejs/cube:v0.32.3
+    env_file: shared.env
+    ports:
+      - 4002:4000
+    environment:
+      - CUBEJS_AGENT_ENDPOINT_URL=ws://collector_1:5000
+    depends_on:
+      - db
+      - router
+      - redis
+      - collector_1
+    volumes:
+      - ./schema:/cube/conf/schema
+  
+  api_4:
+    restart: never
+    image: cubejs/cube:v0.32.3
+    env_file: shared.env
+    ports:
+      - 4003:4000
+    environment:
+      - CUBEJS_AGENT_ENDPOINT_URL=ws://collector_1:5000
+    depends_on:
+      - db
+      - router
+      - redis
+      - collector_1
+    volumes:
+      - ./schema:/cube/conf/schema
 
   # Refresh workers
   refresh_1:
     image: cubejs/cube:v0.32.2
+    restart: never
     env_file: shared.env
     environment:
       - CUBEJS_AGENT_ENDPOINT_URL=ws://collector_1:5000
@@ -86,7 +134,7 @@ services:
   
   # CubeStore Router
   router:
-    # restart: always
+    restart: never
     image: cubejs/cubestore:v0.32.3
     env_file: shared.env
     environment:
@@ -94,10 +142,13 @@ services:
       - CUBESTORE_META_PORT=9999
     volumes:
       - ./data/store:/cube/data
+    depends_on:
+      - minio
+      - redis
 
   # CubeStore Workers
   store_1:
-    # restart: always
+    restart: never
     image: cubejs/cubestore:v0.32.3
     env_file: shared.env
     environment:

@@ -39,6 +39,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["antd", "virtual:4ab183981281644331fa65cfb12330892758d5d8f8dbb32c75081a0d3c6b230f454729fda9cf09306f0a17d4507be96ccbcd55f53deaa0b05ed28e54112d2767#npm:3.26.20"],\
             ["cross-env", "npm:7.0.3"],\
             ["d3", "npm:5.16.0"],\
+            ["eslint-config-react", "npm:1.1.7"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:16.14.0"],\
             ["react-dom", "virtual:4ab183981281644331fa65cfb12330892758d5d8f8dbb32c75081a0d3c6b230f454729fda9cf09306f0a17d4507be96ccbcd55f53deaa0b05ed28e54112d2767#npm:16.14.0"],\
@@ -8438,6 +8439,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["antd", "virtual:4ab183981281644331fa65cfb12330892758d5d8f8dbb32c75081a0d3c6b230f454729fda9cf09306f0a17d4507be96ccbcd55f53deaa0b05ed28e54112d2767#npm:3.26.20"],\
             ["cross-env", "npm:7.0.3"],\
             ["d3", "npm:5.16.0"],\
+            ["eslint-config-react", "npm:1.1.7"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:16.14.0"],\
             ["react-dom", "virtual:4ab183981281644331fa65cfb12330892758d5d8f8dbb32c75081a0d3c6b230f454729fda9cf09306f0a17d4507be96ccbcd55f53deaa0b05ed28e54112d2767#npm:16.14.0"],\
@@ -9423,6 +9425,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["strip-ansi", "npm:6.0.1"],\
             ["strip-json-comments", "npm:3.1.1"],\
             ["text-table", "npm:0.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["eslint-config-react", [\
+        ["npm:1.1.7", {\
+          "packageLocation": "../../../../../.yarn/berry/cache/eslint-config-react-npm-1.1.7-6e3860b2e1-8.zip/node_modules/eslint-config-react/",\
+          "packageDependencies": [\
+            ["eslint-config-react", "npm:1.1.7"]\
           ],\
           "linkType": "HARD"\
         }]\

@@ -14,7 +14,7 @@ const DashboardItems = [
                     {
                         dimension: "Requests.created",
                         granularity: "minute",
-                        dateRange: "last 1 hour"
+                        dateRange: "last 60 minutes"
                     }
                 ],
                 filters: []
@@ -32,7 +32,7 @@ const DashboardItems = [
                     {
                         dimension: "Queries.created",
                         granularity: "minute",
-                        dateRange: "last 1 hour",
+                        dateRange: "last 60 minutes",
                     }
                 ]
             },
