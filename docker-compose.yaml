@@ -1,60 +1,91 @@
-environment:
-      - CUBESTORE_S3_BUCKET=<BUCKET_NAME_IN_S3>
-      - CUBESTORE_S3_REGION=<BUCKET_REGION_IN_S3>
-      - CUBESTORE_AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
-      - CUBESTORE_AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
 services:
   db:
-    # postgres
-  s3server:
-    # s3
-  agent_1:
-    # ...
-  agent_2:
-    # ...
-  cube:
+    image: postgres:13.3 
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=metrics
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio:RELEASE.2023-03-09T23-16-13Z
+    environment:
+    - MINIO_ROOT_USER=user
+    - MINIO_ROOT_PASSWORD=pass
+    cmd: ['server', '/data']
+    ports: ['9000:9000', '9001:9001']
+    volumnes:
+      - ./data/minio:/data
+
+  redis:
+    image: bitnami/redis:6.2.11
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    #logging: { driver: none }
+
+  # Metric collectors
+  collector_1:
+    build: ./collector
+    env_file: shared.env
     restart: always
-    image: cubejs/cube:latest
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+  
+  # API instances
+  api_1:
+    restart: always
+    image: cubejs/cube:v0.32.3
+    env_file: shared.env
     ports:
       - 4000:4000
+      - 3000:3000  # Dashboard app
     environment:
-      - CUBEJS_CUBESTORE_HOST=router
-      - CUBEJS_DEV_MODE=true
-      - CUBEJS_AGENT_ENDPOINT_URL=agent_1
+      - CUBEJS_AGENT_ENDPOINT_URL=ws://collector_1
     depends_on:
+      - db
       - router
+      - redis
     volumes:
-      - ./conf:/cube/conf
+      - ./schema:/cube/conf/schema
+  # add more API instances here
+
+  # Refresh workers
+  refresh_1:
+    image: cubejs/cube:v0.32.2
+    env_file: shared.env
+    environment:
+      - CUBEJS_AGENT_ENDPOINT_URL=ws://collector_1
+      - CUBEJS_REFRESH_WORKER=true
+    volumes:
+      - ./schema:/cube/conf/schema
+    depends_on:
+      - db
+      - router
+      - redis
+  
+  # CubeStore Router
   router:
     restart: always
-    image: cubejs/cubestore:latest
+    image: cubejs/cubestore:v0.32.3
+    env_file: shared.env
     environment:
       - CUBESTORE_SERVER_NAME=router:9999
       - CUBESTORE_META_PORT=9999
-      - CUBESTORE_WORKERS=worker_1:9001,worker_2:9001
-    volumes:
-      - ./data:/cube/data
-  worker_1:
+    #volumes:
+    #  - ./store:/cube/data
+
+  # CubeStore Workers
+  store_1:
     restart: always
-    image: cubejs/cubestore:latest
+    image: cubejs/cubestore:v0.32.3
+    env_file: shared.env
     environment:
-      - CUBESTORE_SERVER_NAME=worker_1:9001
-      - CUBESTORE_WORKER_PORT=9001
-      - CUBESTORE_META_ADDR=router:9999
-      - CUBESTORE_WORKERS=worker_1:9001,worker_2:9001
+      - CUBESTORE_SERVER_NAME=store_1:9001
     depends_on:
       - router
-    volumes:
-      - ./data:/cube/data
-  worker_2:
-    restart: always
-    image: cubejs/cubestore:latest
-    environment:
-      - CUBESTORE_SERVER_NAME=worker_2:9001
-      - CUBESTORE_WORKER_PORT=9001
-      - CUBESTORE_META_ADDR=router:9999
-      - CUBESTORE_WORKERS=worker_1:9001,worker_2:9001
-    depends_on:
-      - router
-    volumes:
-      - ./data:/cube/data
+    #volumes:
+    #  - ./store:/cube/data
