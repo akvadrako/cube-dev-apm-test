@@ -39,7 +39,18 @@ services:
       - ./collector/main.js:/home/main.js
     depends_on:
       - db
-  
+ 
+  # Dashboard
+  dash:
+    build: ./dash
+    command: ['yarn', 'start']
+    ports:
+      - 3000:3000
+    volumes:
+      - ./dash/src:/home/src
+    depends_on:
+      - api_1
+
   # API instances
   api_1:
     # restart: always
@@ -47,7 +58,6 @@ services:
     env_file: shared.env
     ports:
       - 4000:4000
-      - 3000:3000  # Dashboard app
     environment:
       - CUBEJS_AGENT_ENDPOINT_URL=ws://collector_1:5000
     depends_on:
@@ -58,7 +68,6 @@ services:
     volumes:
       - ./schema:/cube/conf/schema
       - ./dashboard-app:/cube/conf/dashboard-app
-  # add more API instances here
 
   # Refresh workers
   refresh_1:

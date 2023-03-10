@@ -96,25 +96,24 @@ async function onMessage(raw, ws) {
     for(let event of data.params.data) {
         let { id, timestamp, msg } = event
         
-        if(IGNORED.includes(msg))
+        if(IGNORED.includes(msg)) {
             continue;
-
-        console.log('event', event)
-
-        if(msg === 'Query completed' && event.query) {
-            await db.query(`
-                INSERT INTO queries(id, created, duration, query)
-                VALUES ($1, $2, $3, $4)
-                ON CONFLICT (id) DO NOTHING
-            `, [id, timestamp, event.duration, event.query])
-        }
-
-        if(msg === 'REST API Request') {
+        } else if(msg === 'Query completed') {
+            if(event.query) {
+                await db.query(`
+                    INSERT INTO queries(id, created, duration, query)
+                    VALUES ($1, $2, $3, $4)
+                    ON CONFLICT (id) DO NOTHING
+                `, [id, timestamp, event.duration, event.query])
+            }
+        } else if(msg === 'REST API Request') {
             await db.query(`
                 INSERT INTO requests(id, created)
                 VALUES ($1, $2)
                 ON CONFLICT (id) DO NOTHING
             `, [id, timestamp])
+        } else {
+            console.log('unknown event', event)
         }
     }
 

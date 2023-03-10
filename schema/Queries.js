@@ -17,7 +17,7 @@ cube(`Queries`, {
             sql: `id`,
         },
 
-        durationMax: {
+        duration: {
             sql: `duration`,
             type: `max`
         }

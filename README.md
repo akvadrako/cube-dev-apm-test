@@ -11,8 +11,9 @@ Questions:
 ## Usage 
 
     docker compose up -d
-
-    open http://localhost:4000 
+    
+    # open Dashboard
+    open http://localhost:3000 
 
 ## TODO
 
@@ -20,14 +21,14 @@ Questions:
 - [x] Write docker-compose
 - [x] Write Schema
 - [x] Run basic cube cluster
-- [ ] Write "agent"
+- [x] Write collector
 - [ ] Write dashboard
-    - Developer Playground ?
-    - q/sec
-    - r/sec
-    - top-10 q by exe_seconds.
-- [ ] Add partitions
-- [ ] [Pre Aggregations](https://cube.dev/docs/schema/reference/pre-aggregations)
+    - queries/sec
+    - requests/sec
+    - top-10 queries by duration 
+- [x] [Pre Aggregations](https://cube.dev/docs/schema/reference/pre-aggregations)
+    - [x] Add partitions
+- [ ] Disable devmode.
 
 To really make it production ready:
 
@@ -37,7 +38,6 @@ To really make it production ready:
 - [ ] Use kustomize and terraform for setup.
 - [ ] Add health checks.
 - [ ] Add authentication (JWT), https://cube.dev/docs/security
-- [ ] Disable devmode.
 
 To scale even more:
 
