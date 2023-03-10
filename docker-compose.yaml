@@ -54,7 +54,7 @@ services:
 
   # API instances
   api_1:
-    restart: never
+    restart: always
     image: cubejs/cube:v0.32.3
     env_file: shared.env
     ports:
@@ -70,7 +70,7 @@ services:
       - ./schema:/cube/conf/schema
   
   api_2:
-    restart: never
+    restart: always
     image: cubejs/cube:v0.32.3
     env_file: shared.env
     ports:
@@ -86,7 +86,7 @@ services:
       - ./schema:/cube/conf/schema
   
   api_3:
-    restart: never
+    restart: always
     image: cubejs/cube:v0.32.3
     env_file: shared.env
     ports:
@@ -102,7 +102,7 @@ services:
       - ./schema:/cube/conf/schema
   
   api_4:
-    restart: never
+    restart: always
     image: cubejs/cube:v0.32.3
     env_file: shared.env
     ports:
@@ -120,7 +120,7 @@ services:
   # Refresh workers
   refresh_1:
     image: cubejs/cube:v0.32.2
-    restart: never
+    restart: always
     env_file: shared.env
     environment:
       - CUBEJS_AGENT_ENDPOINT_URL=ws://collector_1:5000
@@ -135,7 +135,7 @@ services:
   
   # CubeStore Router
   router:
-    restart: never
+    restart: always
     image: cubejs/cubestore:v0.32.3
     env_file: shared.env
     environment:
@@ -149,7 +149,7 @@ services:
 
   # CubeStore Workers
   store_1:
-    restart: never
+    restart: always
     image: cubejs/cubestore:v0.32.3
     env_file: shared.env
     environment:

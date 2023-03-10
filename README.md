@@ -19,12 +19,14 @@ My implementation:
 For scalability:
 - It's possible to add more collectors, API servers, store workers, refresh workers and dashboard instances.
 - By default there are 4 API servers, since they seemed to be the bottleneck.
+- The cubestore uses MinIO to allow workers to be distributed over several systems.
 
 [apm]: https://descriptive-reply-0b7.notion.site/APM-Test-Project-3955dc71b5564923b2dc380c75b49b0b
 
 ## Usage 
 
 1. `docker compose up -d`
+2. Wait for the containers to build and the dashboard to start (it's the slowest part)
 2. Open dashboard at http://localhost:3000
 3. For load testing, you can set the `Load` parameter on the dashboard.
 4. The collector is running at `ws://localhost:5000` if you want to point more sources at it.
