@@ -5,6 +5,9 @@ Goals:
 - production ready and horizontally scalable as much as possible.
 - 100 queries per second
 
+Questions:
+- what counts as a request? Here I am counting only "REST API Request".
+
 ## Usage 
 
     docker compose up -d
@@ -16,7 +19,7 @@ Goals:
 - [x] Create repo
 - [x] Write docker-compose
 - [x] Write Schema
-- [ ] Run basic cube cluster
+- [x] Run basic cube cluster
 - [ ] Write "agent"
 - [ ] Write dashboard
     - Developer Playground ?

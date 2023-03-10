@@ -29,7 +29,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["pg", "virtual:f5a1bb50a9190ecb743d0e417bb89e5adab06bfa05ca108cd854c4097f23e047fbc7c1c4cf1e94cf68b87b2b28601992fd6337746bbe80ba30d4d46213907f55#npm:8.10.0"],\
-            ["ws", "virtual:f5a1bb50a9190ecb743d0e417bb89e5adab06bfa05ca108cd854c4097f23e047fbc7c1c4cf1e94cf68b87b2b28601992fd6337746bbe80ba30d4d46213907f55#npm:8.12.1"]\
+            ["ws", "virtual:f5a1bb50a9190ecb743d0e417bb89e5adab06bfa05ca108cd854c4097f23e047fbc7c1c4cf1e94cf68b87b2b28601992fd6337746bbe80ba30d4d46213907f55#npm:8.12.1"],\
+            ["zlib", "npm:1.0.5"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -49,7 +50,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["cube-collector", "workspace:."],\
             ["pg", "virtual:f5a1bb50a9190ecb743d0e417bb89e5adab06bfa05ca108cd854c4097f23e047fbc7c1c4cf1e94cf68b87b2b28601992fd6337746bbe80ba30d4d46213907f55#npm:8.10.0"],\
-            ["ws", "virtual:f5a1bb50a9190ecb743d0e417bb89e5adab06bfa05ca108cd854c4097f23e047fbc7c1c4cf1e94cf68b87b2b28601992fd6337746bbe80ba30d4d46213907f55#npm:8.12.1"]\
+            ["ws", "virtual:f5a1bb50a9190ecb743d0e417bb89e5adab06bfa05ca108cd854c4097f23e047fbc7c1c4cf1e94cf68b87b2b28601992fd6337746bbe80ba30d4d46213907f55#npm:8.12.1"],\
+            ["zlib", "npm:1.0.5"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -242,6 +244,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "../../../../../.yarn/berry/cache/xtend-npm-4.0.2-7f2375736e-8.zip/node_modules/xtend/",\
           "packageDependencies": [\
             ["xtend", "npm:4.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["zlib", [\
+        ["npm:1.0.5", {\
+          "packageLocation": "./.yarn/unplugged/zlib-npm-1.0.5-9db0b95997/node_modules/zlib/",\
+          "packageDependencies": [\
+            ["zlib", "npm:1.0.5"]\
           ],\
           "linkType": "HARD"\
         }]\
