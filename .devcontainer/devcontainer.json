@@ -2,7 +2,7 @@
   "name": "Cube.dev APM Test Project",
   "dockerComposeFile": "../docker-compose.yaml",
   "service": "dev",
-  "workspaceFolder": "/home",
+  "workspaceFolder": "/work/${localWorkspaceFolderBasename}",
   "shutdownAction": "stopCompose",
   "forwardPorts": [3000, 4000, 5000],
 }

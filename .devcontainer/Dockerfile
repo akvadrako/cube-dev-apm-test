@@ -6,6 +6,6 @@ FROM mcr.microsoft.com/devcontainers/universal:2.2.8-focal
 #    && corepack prepare yarn@stable --activate \
 #    && corepack enable yarn
 
-WORKDIR /home
+# WORKDIR /home
 
 #CMD ["sleep", "365d"]
