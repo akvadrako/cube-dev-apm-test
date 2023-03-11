@@ -1,34 +1,43 @@
 {
-  "name": "Cube.dev APM Test Project",
-  //"image": "mcr.microsoft.com/devcontainers/typescript-node",  
-  "forwardPorts": [3000, 4000, 5000],
+    "name": "Cube.dev APM Test Project",
+    //"image": "mcr.microsoft.com/devcontainers/typescript-node",  
+    "forwardPorts": [3000, 4000, 5000],
 
-  // commands
-  "waitFor": "onCreateCommand",
-  "onCreateCommand": "",
-  "updateContentCommand": "docker-compose build",
-  "postCreateCommand": "docker-compose up -d",
-  "postAttachCommand": "echo attached",
-  
-  // compose settings
-  //"shutdownAction": "stopCompose",
-  //"dockerComposeFile": "../docker-compose.yaml",
-  //"service": "dev",
-  //"workspaceFolder": "/work/${localWorkspaceFolderBasename}",
+    // commands
+    "waitFor": "onCreateCommand",
+    "onCreateCommand": "",
+    "updateContentCommand": "docker-compose build",
+    "postCreateCommand": "docker-compose up -d",
+    "postAttachCommand": "echo attached",
 
-  "portsAttributes": {
-    "3000": {
-      "label": "Dashboard",
-      //"onAutoForward": "openPreview"
+    "features": {
+        // reuse host docker
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
     },
+    "remoteEnv": {
+        // expose location of workspace 
+        "WORKSPACE": "${localWorkspaceFolder}"
+    },
+
+    // compose settings
+    //"shutdownAction": "stopCompose",
+    //"dockerComposeFile": "../docker-compose.yaml",
+    //"service": "dev",
+    //"workspaceFolder": "/work/${localWorkspaceFolderBasename}",
+
+    "portsAttributes": {
+    "3000": {
+    "label": "Dashboard",
+    //"onAutoForward": "openPreview"
+},
     "4000": {
-      "label": "Playground"
+        "label": "Playground"
     },
     "5000": {
-      "label": "Collector"
+        "label": "Collector"
     },
-  },
-   "hostRequirements": {
-    "cpus": 4
-  },
+},
+    "hostRequirements": {
+        "cpus": 4
+    },
 }

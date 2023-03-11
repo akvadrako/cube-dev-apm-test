@@ -165,7 +165,7 @@ services:
   dev:
     command: ["sleep", "365d"]
     network_mode: host
-    build: .devcontainer
+    image: mcr.microsoft.com/devcontainers/typescript-node
     cap_add:
     - SYS_PTRACE
     security_opt:
