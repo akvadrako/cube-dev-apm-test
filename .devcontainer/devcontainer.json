@@ -1,6 +1,6 @@
 {
   "name": "Cube.dev APM Test Project",
-  "dockerComposeFile": "../docker-compose.yml",
+  "dockerComposeFile": "../docker-compose.yaml",
   "service": "dev",
   "workspaceFolder": "/home",
   "shutdownAction": "stopCompose",
