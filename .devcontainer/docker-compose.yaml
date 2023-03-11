@@ -1,0 +1,11 @@
+services:
+  dev:
+    command: ["sleep", "365d"]
+    network_mode: host
+    build: .devcontainer
+    cap_add:
+    - SYS_PTRACE
+    security_opt:
+    - seccomp:unconfined
+    volumes:
+    - ../:/work:cached

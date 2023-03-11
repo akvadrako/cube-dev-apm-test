@@ -161,14 +161,3 @@ services:
     volumes:
       - ./data/store:/cube/data
 
-  # Dev Container
-  dev:
-    command: ["sleep", "365d"]
-    network_mode: host
-    build: .devcontainer
-    cap_add:
-    - SYS_PTRACE
-    security_opt:
-    - seccomp:unconfined
-    volumes:
-    - ../:/work:cached
