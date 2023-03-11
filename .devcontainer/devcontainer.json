@@ -1,8 +1,34 @@
 {
   "name": "Cube.dev APM Test Project",
-  "dockerComposeFile": "../docker-compose.yaml",
-  "service": "dev",
-  "workspaceFolder": "/work/${localWorkspaceFolderBasename}",
-  "shutdownAction": "stopCompose",
+  //"image": "mcr.microsoft.com/devcontainers/typescript-node",  
   "forwardPorts": [3000, 4000, 5000],
+
+  // commands
+  "waitFor": "onCreateCommand",
+  "onCreateCommand": "",
+  "updateContentCommand": "docker-compose build",
+  "postCreateCommand": "docker-compose up -d",
+  "postAttachCommand": "echo attached",
+  
+  // compose settings
+  //"shutdownAction": "stopCompose",
+  //"dockerComposeFile": "../docker-compose.yaml",
+  //"service": "dev",
+  //"workspaceFolder": "/work/${localWorkspaceFolderBasename}",
+
+  "portsAttributes": {
+    "3000": {
+      "label": "Dashboard",
+      //"onAutoForward": "openPreview"
+    },
+    "4000": {
+      "label": "Playground"
+    },
+    "5000": {
+      "label": "Collector"
+    },
+  },
+   "hostRequirements": {
+    "cpus": 4
+  },
 }
