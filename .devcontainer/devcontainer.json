@@ -5,19 +5,30 @@
 
     // commands
     "waitFor": "onCreateCommand",
-    "onCreateCommand": "",
+    //"onCreateCommand": "",
     "updateContentCommand": "docker-compose build",
-    "postCreateCommand": "docker-compose up -d",
-    "postAttachCommand": "echo attached",
+    //"postCreateCommand": "docker-compose up -d",
+    //"postAttachCommand": "echo attached",
 
     "features": {
         // reuse host docker
-        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+        /*"ghcr.io/devcontainers/features/docker-outside-of-docker": {
+            "dockerDashComposeVersion": "v2"
+        }*/
+        /*"docker-in-docker": {
+            "version": "latest",
+            "moby": true,
+            "dockerDashComposeVersion": "v2"
+        }*/        
     },
+
     "remoteEnv": {
         // expose location of workspace 
-        "WORKSPACE": "${localWorkspaceFolder}"
+        "WORKSPACE": "${localWorkspaceFolder}",
+        //"DOCKER_HOST": "unix:///run/docker-host.sock"         
     },
+    //"remoteUser": "root",
+    //"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined", "--privileged", "--init" ],
 
     // compose settings
     //"shutdownAction": "stopCompose",
@@ -26,18 +37,18 @@
     //"workspaceFolder": "/work/${localWorkspaceFolderBasename}",
 
     "portsAttributes": {
-    "3000": {
-    "label": "Dashboard",
-    //"onAutoForward": "openPreview"
-},
-    "4000": {
-        "label": "Playground"
+        "3000": {
+            "label": "Dashboard",
+            //"onAutoForward": "openPreview"
+        },
+        "4000": {
+            "label": "Playground"
+        },
+        "5000": {
+            "label": "Collector"
+        }
     },
-    "5000": {
-        "label": "Collector"
-    },
-},
     "hostRequirements": {
         "cpus": 4
-    },
+    }
 }

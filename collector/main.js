@@ -10,6 +10,7 @@ import jwt from 'jsonwebtoken'
 
 const DB_URL = 'postgres://user:pass@db/metrics'
 const PORT = 5000
+const MAX_MSGS = 1000;
 
 const DB_SETUP = [
 `CREATE TABLE IF NOT EXISTS queries(
@@ -27,29 +28,50 @@ const DB_SETUP = [
 )`,
 `CREATE INDEX IF NOT EXISTS requests_created ON requests(created)`,
 ]
+ 
+const pool = new pg.Pool({
+    connectionString: DB_URL,
+    max: 10,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000,
+})
 
-const db = new pg.Client({ connectionString: DB_URL })
-
+function heartbeat() {
+    this.isAlive = true;
+}
+  
 async function main() {
     console.info('Starting collector')
 
     const token = jwt.sign({}, process.env.CUBEJS_API_SECRET, { expiresIn: '30d' })
     console.log('JWT TOKEN', token)
-
-    await db.connect()
-
+    
+    const db = await pool.connect()
+    
     console.info('DB Setup')
     for(let stmt of DB_SETUP) {
         await db.query(stmt)
     }
+    db.release()
 
     console.info('WebSocket Setup')
-    const wss = new WebSocketServer({ port: PORT });
+    const wss = new WebSocketServer({ port: PORT, backlog: 10, });
     wss.on('connection', onConnect)
+
+    setInterval(function ping() {
+        wss.clients.forEach(function each(ws) {
+          if (ws.isAlive === false) {
+            console.log("NOT ALIVE", ws._socket.address())
+            return ws.terminate();
+          }
+          ws.isAlive = false;
+          ws.ping();
+        });
+      }, 30000);
 
     process.on('SIGTERM', sig => {
         console.error(sig);
-        stop();
+        stop(0);
     });
 }
 
@@ -88,9 +110,11 @@ const IGNORED = [
 
 // TODO: add authentication
 async function onMessage(raw, ws) {
-    let text = inflate(raw, { to: 'string' })
+    let text = await report(inflate, raw, { to: 'string' })
     let data = JSON.parse(text)
     
+    ws.count += 1;
+
     if(data.method !== 'agent') {
         console.warn('unknown packet', data)
         return
@@ -101,7 +125,12 @@ async function onMessage(raw, ws) {
         
         if(IGNORED.includes(msg)) {
             continue;
-        } else if(msg === 'Query completed') {
+        }
+
+        const db = await pool.connect() 
+        await db.query('BEGIN')
+
+        if(msg === 'Query completed') {
             if(event.query) {
                 await db.query(`
                     INSERT INTO queries(id, created, duration, query)
@@ -118,6 +147,9 @@ async function onMessage(raw, ws) {
         } else {
             console.log('unknown event', event.msg)
         }
+        
+        await db.query('COMMIT')
+        db.release()
     }
 
     ws.send(JSON.stringify({
@@ -127,19 +159,41 @@ async function onMessage(raw, ws) {
             result: null,
         }
     }))
+
+    if(ws.count > MAX_MSGS) {
+        console.log("MAX_MSGS", ws._socket.address());
+        ws.terminate();
+    }
 }
 
 function onConnect(ws) {
     console.info('connected', ws._socket.address())
+  
+    ws.isAlive = true;
+    ws.count = 0;
 
-    ws.on('error', stop)
-    ws.on('message', raw => onMessage(raw, ws))
+    ws.on('pong', heartbeat);
+  
+    ws.on('error', err => {
+        console.log("WS-ERR", err)
+        stop(1)
+    })
+    ws.on('message', raw => report(onMessage, raw, ws))
 }
 
-async function stop() {
+async function stop(code) {
     console.error('Stopping')
     await db.end()
-    process.exit(0);
+    process.exit(code)
 }
 
-await main();
+async function report(func, ...args) {
+    try {
+        return await func(...args)
+    } catch(e) {
+        console.error("CAUGHT ERROR", e, {func})
+        stop(1)
+    }
+}
+
+await report(main);

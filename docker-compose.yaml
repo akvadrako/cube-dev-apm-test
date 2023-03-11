@@ -33,6 +33,7 @@ services:
 
   # Metric collectors
   collector_1:
+    restart: always
     build: ./collector
     env_file: shared.env
     ports: ['5000:5000']
@@ -43,7 +44,10 @@ services:
  
   # Dashboard
   dash:
-    build: ./dash
+    build:
+      context: ./dash
+      args:
+      - CODESPACE_NAME
     command: ['yarn', 'start']
     ports:
       - 3000:3000

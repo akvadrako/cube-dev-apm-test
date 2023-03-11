@@ -1,5 +1,9 @@
 # Cube.dev APM Test
 
+The easiest way to test this is via the live demo running on Github Codespaces:
+- [dashboard](https://akvadrako-redesigned-yodel-jrx457649fj74v-3000.preview.app.github.dev/)
+- [collector](https://akvadrako-redesigned-yodel-jrx457649fj74v-5000.preview.app.github.dev/)
+
 ## Intro
 
 This is my submission for the [APM test project][apm]. The goals were:
