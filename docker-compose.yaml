@@ -171,4 +171,4 @@ services:
     security_opt:
     - seccomp:unconfined
     volumes:
-    - ../:/home:cached
+    - ../:/work:cached
