@@ -1,0 +1,8 @@
+{
+  "name": "Cube.dev APM Test Project",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/home",
+  "shutdownAction": "stopCompose",
+  "forwardPorts": [3000, 4000, 5000],
+}
