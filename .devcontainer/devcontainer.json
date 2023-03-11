@@ -1,14 +1,13 @@
 {
     "name": "Cube.dev APM Test Project",
     //"image": "mcr.microsoft.com/devcontainers/typescript-node",  
-    "forwardPorts": [3000, 4000, 5000],
 
     // commands
     "waitFor": "onCreateCommand",
     //"onCreateCommand": "",
     "updateContentCommand": "docker-compose build",
     //"postCreateCommand": "docker-compose up -d",
-    //"postAttachCommand": "echo attached",
+    "postAttachCommand": "./setup.sh",
 
     "features": {
         // reuse host docker
@@ -36,13 +35,17 @@
     //"service": "dev",
     //"workspaceFolder": "/work/${localWorkspaceFolderBasename}",
 
+    "forwardPorts": [3000, 4000, 4001, 4002, 4003, 5000],
     "portsAttributes": {
         "3000": {
             "label": "Dashboard",
             //"onAutoForward": "openPreview"
         },
         "4000": {
-            "label": "Playground"
+            "label": "API-0"
+        },
+        "4001": {
+            "label": "API-1"
         },
         "5000": {
             "label": "Collector"
