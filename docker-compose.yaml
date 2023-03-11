@@ -160,4 +160,3 @@ services:
       - router
     volumes:
       - ./data/store:/cube/data
-
