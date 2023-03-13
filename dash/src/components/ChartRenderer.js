@@ -11,6 +11,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 const COLORS_SERIES = ["#7A77FF", "#141446", "#FF6492", "#727290", "#43436B", "#BEF3BE", "#68B68C", "#FFE7AA", "#B2A58D", "#64C8E0"];
 const CHART_HEIGHT = 300;
+const CHART_REFRESH_INTERVAL = 10 * 1000;
 
 const drawPieChart = (node, resultSet, options) => {
   const data = resultSet.series()[0].series.map(s => s.value);
@@ -245,7 +246,7 @@ const ChartRenderer = ({ vizState }) => {
   useEffect(() => {
     const interval = setInterval(() => {
         renderProps.refetch()
-    }, 1000);
+    }, CHART_REFRESH_INTERVAL);
     return () => clearInterval(interval);
   }, []);
 

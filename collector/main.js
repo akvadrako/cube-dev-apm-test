@@ -19,8 +19,11 @@ const DB_SETUP = [
     query TEXT NOT NULL,
     duration FLOAT NOT NULL
 )`,
-`CREATE INDEX IF NOT EXISTS queries_duration ON queries(duration DESC)`,
 `CREATE INDEX IF NOT EXISTS queries_created ON queries(created)`,
+
+// this index is not actually used. We would need to write a custom SQL
+// query to efficiently find the slowest queries.
+`CREATE INDEX IF NOT EXISTS queries_duration ON queries(duration DESC)`,
 
 `CREATE TABLE IF NOT EXISTS requests(
     id CHAR(32) PRIMARY KEY,
