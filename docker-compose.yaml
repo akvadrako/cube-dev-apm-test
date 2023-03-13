@@ -27,11 +27,11 @@ services:
     volumes:
       - ./data/minio:/data
 
-  redis:
-    image: bitnami/redis:6.2.11
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    #logging: { driver: none }
+  #redis:
+  #  image: bitnami/redis:6.2.11
+  #  environment:
+  #    - ALLOW_EMPTY_PASSWORD=yes
+  #  #logging: { driver: none }
 
   # Metric collectors
   collector_1:
@@ -71,7 +71,6 @@ services:
     depends_on:
       - db
       - router
-      - redis
       - collector_1
     volumes:
       - ./schema:/cube/conf/schema
@@ -87,7 +86,6 @@ services:
     depends_on:
       - db
       - router
-      - redis
       - collector_1
     volumes:
       - ./schema:/cube/conf/schema
@@ -103,7 +101,6 @@ services:
     depends_on:
       - db
       - router
-      - redis
       - collector_1
     volumes:
       - ./schema:/cube/conf/schema
@@ -119,7 +116,6 @@ services:
     depends_on:
       - db
       - router
-      - redis
       - collector_1
     volumes:
       - ./schema:/cube/conf/schema
@@ -137,7 +133,6 @@ services:
     depends_on:
       - db
       - router
-      - redis
       - collector_1
   
   # CubeStore Router
@@ -152,7 +147,6 @@ services:
       - ./data/store:/cube/data
     depends_on:
       - minio
-      - redis
 
   # CubeStore Workers
   store_1:

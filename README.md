@@ -1,6 +1,8 @@
 # Cube.dev APM Test
 
-The easiest way to test this is via the live demo running on Github Codespaces:
+The easiest way to test this is by asking me to start the Codespaces environment and heading
+to one of these URLs:
+
 - [dashboard](https://akvadrako-redesigned-yodel-jrx457649fj74v-3000.preview.app.github.dev/)
 - [collector](https://akvadrako-redesigned-yodel-jrx457649fj74v-5000.preview.app.github.dev/)
 
@@ -49,7 +51,6 @@ To really make it production ready:
 To scale even more:
 
 - [ ] Replace postgreSQL with clustered DB.
-- [ ] Scale redis service.
 - [ ] Scale S3 service or use real S3.
 
 ## TODO: Done
