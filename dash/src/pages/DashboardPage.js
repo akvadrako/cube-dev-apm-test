@@ -7,6 +7,7 @@ const DashboardItems = [
     {
         id: 0,
         name: "Requests per minute",
+        width: 6,
         vizState: {
             query: {
                 measures: ["Requests.count"],
@@ -25,6 +26,7 @@ const DashboardItems = [
     {
         id: 1,
         name: "Queries per minute",
+        width: 6,
         vizState: {
             query: {
                 measures: ["Queries.count"],
@@ -42,6 +44,7 @@ const DashboardItems = [
     {
         id: 2,
         name: "Slowest 10 Queries",
+        width: 12,
         vizState: {
             query: {
                 "measures": [
@@ -75,7 +78,7 @@ const DashboardItems = [
 
 const DashboardPage = () => {
     const dashboardItem = item => (
-        <Grid item xs={12} lg={6} key={item.id}>
+        <Grid item xs={12} lg={item.width} key={item.id}>
             <DashboardItem title={item.name}>
                 <ChartRenderer vizState={item.vizState} />
             </DashboardItem>

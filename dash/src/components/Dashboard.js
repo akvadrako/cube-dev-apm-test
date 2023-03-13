@@ -8,7 +8,6 @@ const Dashboard = ({ children }) => (
     style={{
       padding: 24
     }}
-    justify="space-around"
     alignItems="flex-start"
   >
     {children}

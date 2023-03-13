@@ -2,14 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { HashRouter as Router, Route } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage";
+import { createRoot } from 'react-dom/client';
 
-ReactDOM.render(
-  <Router>
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(
     <App>
-      <Route key="index" exact path="/" component={DashboardPage} />
+      <DashboardPage />
     </App>
-  </Router>,
-  document.getElementById("root")
 );
+

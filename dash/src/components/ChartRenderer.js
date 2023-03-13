@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import { useCubeQuery } from "@cubejs-client/react";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -234,8 +234,28 @@ const renderChart = Component => ({ resultSet, error, ...props }) =>
 const ChartRenderer = ({ vizState }) => {
   const { query, chartType, pivotConfig = null } = vizState;
   const component = TypeToMemoChartComponent[chartType];
-  const renderProps = useCubeQuery(query);
-  return component && renderChart(component)({ pivotConfig, ...renderProps });
+  const renderProps = useCubeQuery(query, {
+    subscribe: true,
+  });
+  const chart = renderChart(component)({ pivotConfig, ...renderProps });
+  const when = (new Date()).toISOString().substring(11, 19) + ' UTC';
+
+  window.x = renderProps;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+        renderProps.refetch()
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return component && <div>
+        {chart}
+        <p>
+            Updated: {when},
+            Progress: {JSON.stringify(renderProps.progress)}
+        </p>
+    </div>;
 };
 
 ChartRenderer.propTypes = {

@@ -83,10 +83,11 @@ const ServerLoad = ({ port, rate }) => {
 
                 latency = Date.now() - start;
                 delay = (1000 / rate) - latency;
-                let when = (new Date()).toISOString().substring(11, 19);
+                let when = (new Date()).toISOString().substring(11, 19) + ' UTC';
 
                 setUpdated(when + ', ' + delay + 'ms delay, ' + latency + 'ms latency');
-                setCount(JSON.stringify(result.loadResponse.data.map(x => x['Requests.count'])));
+
+                setCount(JSON.stringify(result.rawData().map(x => x['Requests.count'])));
             } catch(e) {
                 console.error(e)
             }
